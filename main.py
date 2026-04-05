@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from db import db
 from models import Usuarios
 # from views import *
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+import hashlib
 
 app = Flask(__name__)
 app.secret_key = 'schorrocode'
@@ -11,6 +12,9 @@ lm.login_view = 'registrar'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bank.db'
 db.init_app(app)
 
+def hash(txt):
+    hash_obj = hashlib.sha256(txt.encode('utf-8'))
+    return hash_obj.hexdigest()
 
 @lm.user_loader
 def load_user(id):
@@ -33,7 +37,7 @@ def login():
         nome = request.form.get('nome')
         senha = request.form.get('senha')
 
-        user = db.session.query(Usuarios).filter_by(nome=nome, senha=senha).first()
+        user = db.session.query(Usuarios).filter_by(nome=nome, senha=hash(senha)).first()
         if not user:
             return 'Usuário ou senha incorretos'
         login_user(user)
@@ -56,7 +60,7 @@ def registrar():
         nome = request.form.get('nome')
         senha = request.form.get('senha')
 
-        novo_usuario = Usuarios(nome=nome, senha=senha)
+        novo_usuario = Usuarios(nome=nome, senha=hash(senha))
         db.session.add(novo_usuario)
         db.session.commit()
 

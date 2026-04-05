@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Bank</title>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="background-video">
+        <source src="{{ url_for('static', filename='videos/money.mp4') }}" type="video/mp4">
+    </video>
+    <div id="container-title">
+        <h1>BRYAN BANCOS ENTERTAINMENT</h1>
+    </div>
+    <div id="container-login">
+        <p>Login!</p>
+        <form action="/login" method="post">
+           <input name="nome" placeholder="Username" type="text"><br>
+           <input name="senha" placeholder="Password" type="password"><br>
+           <input type="submit" value="Login">
+        </form>
+
+        <a href="">Forgot your password?</a>
+    </div>
+    
+    <script src="static/script.js"></script>
+</body>
+</html>

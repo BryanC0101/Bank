@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Bank</title>
 </head>
 <body>
     <video autoplay muted loop playsinline id="background-video">
-        <source src="static/videos/money.mp4" type="video/mp4">
+        <source src="{{ url_for('static', filename='videos/money.mp4') }}" type="video/mp4">
     </video>
     <div id="container-title">
         <h1>BRYAN BANCOS ENTERTAINMENT</h1>
@@ -18,7 +18,7 @@
         <form action="/registrar" method="post">
            <input name="nome" placeholder="Username" type="text"><br>
            <input name="senha" placeholder="Password" type="password"><br>
-           <input type="submit" value="Login">
+           <input type="submit" value="Register">
         </form>
 
         <a href="">Forgot your password?</a>
